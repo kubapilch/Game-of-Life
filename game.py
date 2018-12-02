@@ -46,9 +46,7 @@ def create_grid():
 
 def check():
     global grid
-
     old_grid = copy.deepcopy(grid)
-    
 
     for row in grid:
         for cell in row:
@@ -136,7 +134,6 @@ while not exitGame:
         check()
 
         if superior().number_alive == 0:
-            print(superior().number_alive)
             exitGame = True
 
     create_grid()   
