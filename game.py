@@ -5,22 +5,26 @@ import copy
 
 pygame.init()
 
+#Colors
 background = (0, 0, 0)
 deadCell = (195, 200, 181)
 aliveCell = (0, 27, 9)
 
+#Can change those if you want
 amount = 20
 size = 20
-display_size = ((amount*size) + amount - 1, (amount*size) + amount - 1)
+
+#Some math to calculate size of the screen based on size and amount of cells + space between them
+display_size = ((amount*size) + amount - 1, (amount*size) + amount - 1) 
 display = pygame.display.set_mode(display_size)
 
 exitGame = False
 gameStarted = False
 
-FPS = 2
-
 grid = list()
 
+#FPS control variables
+FPS = 2
 clock = pygame.time.Clock()
 
 def create_array():
@@ -35,7 +39,7 @@ def create_array():
 
 def create_grid():
     display.fill(background)
-    
+    #Render grid
     for row in grid:
         for cell in row:
             if cell.alive:
@@ -46,6 +50,8 @@ def create_grid():
 
 def check():
     global grid
+
+    #Create old gird tamplate
     old_grid = copy.deepcopy(grid)
 
     for row in grid:
@@ -58,12 +64,14 @@ def check():
             next_column = cell.column + 1
             previous_column = cell.column - 1
             
+            # To prevent calling old_grid[-1]
             if previous_row < 0:
                 previous_row = len(row) + 100
             
             if previous_column < 0:
                 previous_column = len(row) + 100
 
+            #Check for alive neighbors
             try:
                 if old_grid[next_row][cell.column].alive:
                     alive += 1
@@ -110,15 +118,18 @@ def check():
             elif alive == 3:
                 cell.alive = True
 
+#Initialize grid list and render first grid view
 create_array()
 create_grid()
 
 while not exitGame:
     
     for event in pygame.event.get():
+        #Check if user wants to quit
         if event.type == pygame.QUIT:
             exitGame = True
 
+        #Placing cells
         if event.type == pygame.MOUSEBUTTONDOWN and not gameStarted:
             for row in grid:
                 for cell in row:
@@ -126,6 +137,7 @@ while not exitGame:
                     if cell.is_in_range(click[0], click[1]):
                         cell.alive = (not cell.alive)
         
+        #Start the game
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 gameStarted = True
@@ -133,9 +145,11 @@ while not exitGame:
     if gameStarted: 
         check()
 
+        #Check if all cells are dead
         if superior().number_alive == 0:
             exitGame = True
 
+    #Render grid
     create_grid()   
     clock.tick(FPS)
         
