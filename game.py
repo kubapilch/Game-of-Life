@@ -141,9 +141,12 @@ while not exitGame:
         
         #Start the game
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
+            if event.key == pygame.K_SPACE and not gameStarted:
                 gameStarted = True
                 FPS = 2
+            elif event.key == pygame.K_SPACE and gameStarted:
+                gameStarted = False
+                FPS = 30
 
     if gameStarted: 
         check()
