@@ -155,7 +155,6 @@ while not exitGame:
         if superior().number_alive == 0:
             exitGame = True
 
-    print(FPS)
     clock.tick(FPS)
         
 
