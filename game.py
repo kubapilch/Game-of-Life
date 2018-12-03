@@ -30,10 +30,10 @@ clock = pygame.time.Clock()
 def create_array():
     global grid
     
-    for z in range(0, amount):
+    for row in range(0, amount):
         placeholder = []
-        for i in range(0, amount):
-            cell = square(z, i, i*size + i, z*size + z, amount, size)
+        for column in range(0, amount):
+            cell = square(row, column, column*size + column, row*size + row, amount, size)
             placeholder.append(cell)
         grid.append(placeholder)
 
