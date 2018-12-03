@@ -17,22 +17,6 @@ class square(superior):
         
         superior.number += 1
 
-    @property
-    def is_first_row(self):
-        return (self.row == 0)
-    
-    @property
-    def is_last_row(self):
-        return (self.row == self.number_of_columns - 1)
-    
-    @property
-    def is_first_column(self):
-        return (self.column == 0)
-    
-    @property
-    def is_last_column(self):
-        return (self.column == self.number_of_columns - 1)
-
     def is_in_range(self, x, y):
         if x in range(self.x, self.x + self.size + 1) and y in range(self.y, self.y + self.size + 1):
             return True
