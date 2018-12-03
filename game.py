@@ -21,6 +21,9 @@ display = pygame.display.set_mode(display_size)
 exitGame = False
 gameStarted = False
 
+mousePressed = False
+highlitedCells = []
+
 grid = list()
 
 #FPS control variables
@@ -130,15 +133,24 @@ while not exitGame:
             exitGame = True
 
         #Placing cells
-        if event.type == pygame.MOUSEBUTTONDOWN and not gameStarted:
+        if mousePressed:
             for row in grid:
                 for cell in row:
                     click = pygame.mouse.get_pos()
-                    if cell.is_in_range(click[0], click[1]):
+                    if cell.is_in_range(click[0], click[1]) and cell not in highlitedCells:
                         cell.alive = (not cell.alive)
-                        create_grid() 
-
+                        create_grid()
+                        highlitedCells.append(cell)
         
+        #Start drawing
+        if event.type == pygame.MOUSEBUTTONDOWN and not gameStarted:
+            mousePressed = True
+        
+        #Stop drawing
+        if event.type == pygame.MOUSEBUTTONUP and not gameStarted:
+            mousePressed = False
+            highlitedCells = []
+
         #Start the game
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE and not gameStarted:
