@@ -24,7 +24,7 @@ gameStarted = False
 grid = list()
 
 #FPS control variables
-FPS = 2
+FPS = 30
 clock = pygame.time.Clock()
 
 def create_array():
@@ -136,21 +136,26 @@ while not exitGame:
                     click = pygame.mouse.get_pos()
                     if cell.is_in_range(click[0], click[1]):
                         cell.alive = (not cell.alive)
+                        create_grid() 
+
         
         #Start the game
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 gameStarted = True
+                FPS = 2
 
     if gameStarted: 
         check()
-
+        
+        #Render grid
+        create_grid()  
+        
         #Check if all cells are dead
         if superior().number_alive == 0:
             exitGame = True
 
-    #Render grid
-    create_grid()   
+    print(FPS)
     clock.tick(FPS)
         
 
