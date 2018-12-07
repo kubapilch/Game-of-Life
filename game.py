@@ -1,5 +1,4 @@
 import pygame
-from time import sleep
 from square import square, superior
 import copy
 import atexit
