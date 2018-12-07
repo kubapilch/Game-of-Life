@@ -11,7 +11,7 @@ class square(superior):
         self.column = column
         self.x = x
         self.y = y
-        self.number_of_columns = number_of_columns
+        self.number_of_columns = number_of_columns - 1
         self.size = size
         self.live = False
         
@@ -27,6 +27,22 @@ class square(superior):
     def alive(self):
         return self.live
     
+    @property
+    def is_in_last_column(self):
+        return self.number_of_columns == self.column
+    
+    @property
+    def is_in_first_column(self):
+        return self.column == 0
+    
+    @property
+    def is_in_first_row(self):
+        return self.row == 0
+    
+    @property
+    def is_in_last_row(self):
+        return self.number_of_columns == self.row
+
     @alive.setter
     def alive(self, isalive):
         if self.live and not isalive:
