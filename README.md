@@ -1,6 +1,6 @@
 # Game-of-Life
 
-This is my implementation of popular game [Game Of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) created by the British mathematician John Horton Conway.
+This is my pygame implementation of popular game [Game Of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) created by the British mathematician John Horton Conway.
 
 If you want to play it, all you need to do is copy my repository, install pygame and run game.py.
 
