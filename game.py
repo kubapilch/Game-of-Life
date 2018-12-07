@@ -105,51 +105,51 @@ class Game():
         return grid
 
     def start_game(self):
-        mousePressed = False
-        highlitedCells = []
+        mouse_pressed = False
+        highlighted_cells = []
 
-        exitGame = False
-        gameStarted = False
-        
+        exit_game = False
+        game_started = False
+
         grid = self.create_array()
         self.create_grid(grid)
-        
-        while not exitGame:
-            
+
+        while not exit_game:
+
             for event in pygame.event.get():
                 #Check if user wants to quit
                 if event.type == pygame.QUIT:
-                    exitGame = True
+                    exit_game = True
 
                 #Placing cells
-                if mousePressed:
+                if mouse_pressed:
                     for row in grid:
                         for cell in row:
                             click = pygame.mouse.get_pos()
-                            if cell.is_in_range(click[0], click[1]) and cell not in highlitedCells:
+                            if cell.is_in_range(click[0], click[1]) and cell not in highlighted_cells:
                                 cell.alive = (not cell.alive)
                                 self.create_grid(grid)
-                                highlitedCells.append(cell)
+                                highlighted_cells.append(cell)
                 
                 #Start drawing
-                if event.type == pygame.MOUSEBUTTONDOWN and not gameStarted:
-                    mousePressed = True
+                if event.type == pygame.MOUSEBUTTONDOWN and not game_started:
+                    mouse_pressed = True
                 
                 #Stop drawing
-                if event.type == pygame.MOUSEBUTTONUP and not gameStarted:
-                    mousePressed = False
-                    highlitedCells = []
+                if event.type == pygame.MOUSEBUTTONUP and not game_started:
+                    mouse_pressed = False
+                    highlighted_cells = []
 
                 #Start the game
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_SPACE and not gameStarted:
-                        gameStarted = True
+                    if event.key == pygame.K_SPACE and not game_started:
+                        game_started = True
                         self.FPS = 2
-                    elif event.key == pygame.K_SPACE and gameStarted:
-                        gameStarted = False
+                    elif event.key == pygame.K_SPACE and game_started:
+                        game_started = False
                         self.FPS = 30
 
-            if gameStarted: 
+            if game_started:
                 grid = self.check(grid)
                 
                 #Render grid
@@ -157,7 +157,7 @@ class Game():
                 
                 #Check if all cells are dead
                 if superior().number_alive == 0:
-                    exitGame = True
+                    exit_game = True
 
             self.clock.tick(self.FPS)
     
