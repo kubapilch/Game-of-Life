@@ -51,8 +51,3 @@ class square(superior):
             superior.number_alive += 1
 
         self.live = isalive
-
-        
-            
-        
-
