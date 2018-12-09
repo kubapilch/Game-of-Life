@@ -3,8 +3,6 @@ class superior():
     number_alive = 0
 
 class square(superior):
-
-    number = 0
     
     def __init__(self, row, column, x, y, number_of_columns, size):
         self.row = row

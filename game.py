@@ -3,9 +3,9 @@ from square import square, superior
 import copy
 import atexit
 
-pygame.init()
-
 class Game():
+
+    pygame.init()
 
     #Colors
     backgroundColor = (0, 0, 0)
@@ -160,7 +160,8 @@ class Game():
 
             self.clock.tick(self.FPS)
     
-    def cleanup(self):
+    @staticmethod
+    def cleanup():
         pygame.quit()
         quit()
 
